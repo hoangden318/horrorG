@@ -10,6 +10,10 @@ public class OpenDoor : MonoBehaviour
     [SerializeField] protected Text actionKey;
     [SerializeField] protected AudioSource creakDoor;
 
+    private void Start()
+    {
+        actionKey.gameObject.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -29,9 +33,9 @@ public class OpenDoor : MonoBehaviour
             actionKey.gameObject.SetActive(true);
             if (Input.GetKey(KeyCode.E))
             {
-                actionKey.gameObject.SetActive(false);
                 theDoor.GetComponentInParent<Animation>().Play("FirstOpenTheDoor");
                 creakDoor.Play();
+                actionKey.gameObject.SetActive(false);
             }
         }
         return;
