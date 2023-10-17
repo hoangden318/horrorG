@@ -14,36 +14,38 @@ public class OpenDoor : MonoBehaviour
     {
         actionKey.gameObject.SetActive(false);
     }
-    // Update is called once per frame
-    void Update()
-    {
-       this.CaculateDistance();
-        this.Open();
-    }
 
     public virtual void CaculateDistance()
     {
         theDistance = PlayerCasting.distanceFromTarget;
     }
-
-    public void Open()
+    void FixedUpdate()
     {
-        if (theDistance <= 2)
-        {
-            actionKey.gameObject.SetActive(true);
-            if (Input.GetKey(KeyCode.E))
-            {
-                theDoor.GetComponentInParent<Animation>().Play("FirstOpenTheDoor");
-                creakDoor.Play();
-                actionKey.gameObject.SetActive(false);
-            }
-        }
-        return;
+       this.CaculateDistance();
+        
     }
 
-    public void OnMouseExit()
+    private void OnMouseOver()
+    {
+        if(theDistance <= 3)
+        {
+            actionKey.gameObject.SetActive(true);
+        }
+
+        if(Input.GetKey(KeyCode.E) && theDistance <=3)
+        {
+            theDoor.GetComponentInParent<Animation>().Play("FirstOpenTheDoor");
+            creakDoor.Play();
+            actionKey.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnMouseExit()
     {
         actionKey.gameObject.SetActive(false);
     }
+  
+
+    
 
 }

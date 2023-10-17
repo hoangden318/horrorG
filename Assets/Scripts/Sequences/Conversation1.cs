@@ -11,10 +11,10 @@ public class Conversation1 : MonoBehaviour
     void Start()
     {
         Player.GetComponent<FirstPersonController>().enabled = false;
-        StartCoroutine(ScencePlayer());
+        StartCoroutine(ScenceBeginPlayer());
     }
 
-    IEnumerator ScencePlayer()
+    IEnumerator ScenceBeginPlayer()
     {
         yield return new WaitForSeconds(1.5f);
         FadeScreenIn.SetActive(false);
